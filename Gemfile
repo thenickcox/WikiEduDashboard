@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.5'
+ruby '2.1.6'
 gem 'rails', '4.1.8'
 gem 'jbuilder', '~> 2.0'
 
