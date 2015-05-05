@@ -5,7 +5,7 @@ describe CourseHelper, type: :helper do
     it 'should return a link to a user\'s contributions page' do
       user = build(:user)
       link = contribution_link(user)
-      expect(link).to include('<a href=')
+      expect(link).to match(/<a.* href=/)
     end
   end
 
@@ -14,7 +14,7 @@ describe CourseHelper, type: :helper do
       build(:user).save
       build(:trained).save
       links = user_links(User.all)
-      expect(links).to include('<a href=')
+      expect(links).to match(/<a.* href=/)
     end
   end
 end

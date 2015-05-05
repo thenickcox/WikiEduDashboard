@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.1.6'
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.1'
 gem 'jbuilder', '~> 2.0'
 
 gem 'mediawiki-gateway'
