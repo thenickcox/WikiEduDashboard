@@ -11,42 +11,46 @@ class CoursesController < ApplicationController
   # Root method #
   ###############
   def index
-    if user_signed_in?
-      if current_user.permissions > 0
-        @admin_courses = Course.includes(:cohorts).where('cohorts.id IS NULL')
-                         .where(listed: true).where(submitted: true)
-                         .references(:cohorts)
-      end
-
-      @user_courses = current_user.courses.current_and_future.select do |c|
-        c if c.listed
-      end
-    end
-
-    if params.key?(:cohort)
-      if params[:cohort] == 'none'
-        @cohort = OpenStruct.new(
-          title: 'Unsubmitted Courses',
-          slug: 'none',
-          students: []
-        )
-        @courses = Course.where(submitted: false)
-                   .where(listed: true).where('id >= 10000')
-        return
-      else
-        @cohort = Cohort.includes(:students).find_by(slug: params[:cohort])
-      end
-    elsif !Figaro.env.default_cohort.nil?
-      slug = Figaro.env.default_cohort
-      @cohort = Cohort.includes(:students).find_by(slug: slug)
-    end
-    @cohort ||= nil
-
-    raise ActionController::RoutingError.new('Not Found') if @cohort.nil?
-
-    @courses = @cohort.courses.where(listed: true).order(:title)
-    @trained = @cohort.students.where(trained: true).count
+    @course = Course.first
   end
+
+  #format.html do
+    #if user_signed_in?
+      #if current_user.permissions > 0
+        #@admin_courses = Course.includes(:cohorts).where('cohorts.id IS NULL')
+                         #.where(listed: true).where(submitted: true)
+                         #.references(:cohorts)
+      #end
+
+      #@user_courses = current_user.courses.current_and_future.select do |c|
+        #c if c.listed
+      #end
+    #end
+
+    #if params.key?(:cohort)
+      #if params[:cohort] == 'none'
+        #@cohort = OpenStruct.new(
+          #title: 'Unsubmitted Courses',
+          #slug: 'none',
+          #students: []
+        #)
+        #@courses = Course.where(submitted: false)
+                   #.where(listed: true).where('id >= 10000')
+        #return
+      #else
+        #@cohort = Cohort.includes(:students).find_by(slug: params[:cohort])
+      #end
+    #elsif !Figaro.env.default_cohort.nil?
+      #slug = Figaro.env.default_cohort
+      #@cohort = Cohort.includes(:students).find_by(slug: slug)
+    #end
+    #@cohort ||= nil
+
+    #raise ActionController::RoutingError.new('Not Found') if @cohort.nil?
+
+    #@courses = @cohort.courses.where(listed: true).order(:title)
+    #@trained = @cohort.students.where(trained: true).count
+  #end
 
   ################
   # CRUD methods #

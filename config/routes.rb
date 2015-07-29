@@ -1,11 +1,13 @@
 # Page titles on Wikipedia may include dots, so this constraint is needed.
 
 Rails.application.routes.draw do
-  get 'errors/file_not_found'
+  unless Rails.env.development?
+    get 'errors/file_not_found'
 
-  get 'errors/unprocessable'
+    get 'errors/unprocessable'
 
-  get 'errors/internal_server_error'
+    get 'errors/internal_server_error'
+  end
 
   # Sessions
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
@@ -101,7 +103,9 @@ Rails.application.routes.draw do
   get '/course_creator(/*any)' => 'courses#index'
 
   # Errors
-  match '/404', to: 'errors#file_not_found', via: :all
-  match '/422', to: 'errors#unprocessable', via: :all
-  match '/500', to: 'errors#internal_server_error', via: :all
+  unless Rails.env.development?
+    match '/404', to: 'errors#file_not_found', via: :all
+    match '/422', to: 'errors#unprocessable', via: :all
+    match '/500', to: 'errors#internal_server_error', via: :all
+  end
 end

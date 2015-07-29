@@ -39,6 +39,18 @@ API =
         console.log 'Error: ' + obj.responseJSON.message
         rej obj
 
+  fetchStats: ->
+    new Promise (res, rej) ->
+      $.ajax
+        type: 'GET',
+        url: '/courses.json',
+        success: (data) ->
+          console.log 'Received courses'
+          res data
+      .fail (obj, status) ->
+        console.log 'Error: ' + obj.responseJSON.message
+        rej obj
+
   fetchCohorts: ->
     new Promise (res, rej) ->
       $.ajax

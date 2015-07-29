@@ -216,6 +216,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -357,6 +359,7 @@ DEPENDENCIES
   pandoc-ruby (~> 1.0.0)
   pg
   piwik_analytics!
+  pry-rails
   quiet_assets
   rails (= 4.1.8)
   rake
@@ -375,4 +378,4 @@ DEPENDENCIES
   zeus
 
 BUNDLED WITH
-   1.10.3
+   1.10.6

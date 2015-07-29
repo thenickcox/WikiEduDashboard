@@ -30,6 +30,11 @@ ServerActions = Flux.createActions
       { actionType: 'RECEIVE_WIZARD_INDEX', data: {
         wizard_index: data
       }}
+  fetchStats: ->
+    API.fetchStats().then (data) ->
+      { actionType: 'RECEIVE_STATS', data: {
+        stats: data.stats
+      }}
   fetchWizardPanels: (wizard_id) ->
     API.fetchWizardPanels(wizard_id).then (data) ->
       { actionType: 'RECEIVE_WIZARD_PANELS', data: {

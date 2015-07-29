@@ -4,6 +4,7 @@ Route               = Router.Route
 DefaultRoute        = Router.DefaultRoute
 
 App                 = require '../components/app'
+Home                = require '../components/home'
 Course              = require '../components/course'
 Wizard              = require '../components/wizard/wizard'
 Dates               = require '../components/timeline/meetings'
@@ -18,7 +19,7 @@ ArticlesHandler     = require '../components/articles/articles_handler'
 UploadsHandler      = require '../components/uploads/uploads_handler'
 
 routes = (
-  <Route name='root' path='/' handler={App}>
+  <Route name='root' path='/' handler={Home}>
     <Route path='courses' handler={App}>
       <Route name='course' path=':course_school/:course_title' handler={Course}>
         <Route name='overview' path='overview' handler={OverviewHandler}></Route>
